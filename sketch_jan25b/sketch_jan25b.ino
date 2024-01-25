@@ -67,5 +67,33 @@ void loop() {
   Serial.print("Kelembapan air tahan: ");
   Serial.print(M);
   Serial.print(" %");
+  bot.sendMessage(CHAT_ID, "Monitoring tanaman SMKN7 Baleendah");
+  KirimPesanTelegram(h, t, M);
   delay(2000);
 }
+void KirimPesanTelegram(float h, float t, int M) {
+  String pesan = "Suhu saat ini: " + String(t, 2) + " C\n" +
+  "Humiditas udara saat ini: " + String(h, 2) + " %\n" +
+  "Tingkat kelembapan tanah saat ini: " + String(M) + " %\n";
+
+  if (bot.sendMessage(CHAT_ID, pesan, "Markdown")) {
+    Serial.println("Pesan berhasil dikirim");
+  } else {
+    Serial.println("Gagal mengirim pesan");
+  }
+  delay(1000); 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
